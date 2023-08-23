@@ -1,9 +1,7 @@
 # Introduction
 
-This is a book created from markdown and executable code.
+If you are new to the System of National Accounts [@SNA2008], don't worry, I will explain the most relevant concepts as we move forward. For now, it's sufficient to know that it is the macroeconomic accounting standard and data collection effort with which countries measure economic performance. It outputs the famous Gross Domestic Product (GDP) among many other macroeconomic indicators and it is one of the most important tools when designing and analyzing public policies.
 
-See @knuth84 for additional discussion of literate programming.
+In its most basic form 
 
-```{r}
-1 + 1
-```
+

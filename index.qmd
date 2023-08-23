@@ -1,9 +1,13 @@
 # Preface {.unnumbered}
 
-This is a Quarto book.
+I have been working with the System of National Accounts data my entire professional career in Economics, using it to uncover the links between the economy, the environment, and social issues at the national level. Wrangling data is perhaps one of the most time-consuming tasks in this line of work and finding ways to be more efficient in that regard has always been one of my priorities. A couple of years ago, when the workflow with which I manage this type of data saved my client valuable months of work, I realized I had something worth sharing with the community of macroeconomic information users. That's when I decided that it was time to write this guide.
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+This is a hands-on document, which means that it is meant to be practical. I want you to whip out your R and RStudio installations and code, make mistakes, and learn by doing. I chose R for this guide because it is the language with which I feel most comfortable, but the workflow that I will show you aims to be general, and so it can be easily be implemented with other languages and environments with similar data management capabilities, such as [Python](https://www.python.org/) with [Pandas](https://pandas.pydata.org/) or [Julia](https://julialang.org/). Like those other alternatives, R is open source, which means that it is free, both as in speech and as in beer.
 
-```{r}
-1 + 1
-```
+I want to thank Andrés Mondaini from the UN Economic Commission for Latin America and The Caribbean (ECLAC) for helping me validate this methodology thoroughly, testing it with over 20 years of National Accounts data for 13 Latin American countries in an effort to explore the macroeconomic importance of the bioeconomy in the region. Moreover, I would have not acquired the techniques in this guide if it wasn't for the support from Juan Pablo Castaneda, Onil Banerjee, and Adrián Rodríguez, who have commissioned me to conduct countless environmentally and socially-extended analyses for the World Bank, the Inter-American Development Bank, and ECLAC, respectively, providing me with ample opportunities to refine the workflow and methodology shown here.
+
+This website is and will always be free, licensed as follows: 
+
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://renatovargas.com/guides/SCN-data-book">National Accounts Data Management for Practical Applications Using R and RStudio</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://renatovargas.com/">Renato Vargas</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+
+However, physical copies will be available to purchase in the future. You might be interested in the Spanish translation here.
