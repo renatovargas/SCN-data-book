@@ -1,10 +1,19 @@
 # Introduction
 
-If you are new to the System of National Accounts [@SNA2008], don't worry, I will explain the most relevant concepts as we move forward. For now, it's sufficient to know that it is the macroeconomic accounting standard and data collection effort with which countries measure economic performance. It outputs the famous Gross Domestic Product (GDP), but it is much more than that. It has an abundance of data regarding production and consumption of goods and services in a country. However, the way in which this data is put together by Central Banks and Statistical Offices is often cumbersome to explore. This guide is designed to make that process much easier.
+If you are new to the System of National Accounts [@SNA2008], don't worry, I will explain the most relevant concepts as we move forward. For now, it's sufficient to know that it is the macroeconomic accounting standard and data collection effort with which countries measure economic performance. It outputs the famous Gross Domestic Product (GDP), but it is much more than that. It has an abundance of data regarding production and consumption of goods and services in a country and abroad. However, the way in which this data is put together by Central Banks and Statistical Offices is often cumbersome to explore in my opinion. This guide is designed to make that process much easier.
+
+The System of National Accounts is quite comprehensive, as it covers the production and consumption of goods and services, the distribution of income and investment, government revenue and expenditure, and our financial interactions with the rest of the world. However, in this guide we will focus only on the production and consumption of goods and services. This part is found in what the SNA calls "Supply and Use Tables". In the following chapter, we will look at these tables more closely and explain their individual areas, each of which represent a series of "transactions" in SNA parlance. In the meantime, however, we will play a little with the final result.
+
+## Who is this book for and what you will learn
+
+As much as we are talking about a macroeconomic accounting standard, this is not an economics book. It is a data science book whose target audience are social science practitioners. That is people in public policy research or advisory positions who need to make sense of business, economic, environmental, and social issues using macroeconomic information.
+
+First, you will **import** supply and use tables into R. These tables are published in spreadsheet format (usually one or several Excel files) and you will see that, although Central Banks or statistical offices have their own idiosyncratic way of arranging these tables within those files, there are similarities that will help us make our approach general to most (if not all of them). After all, they are all based on a standard.
 
 
 
-In this intr
-
+```{r}
+library(tidyverse)
+```
 
 
