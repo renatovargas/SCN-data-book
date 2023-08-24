@@ -1,7 +1,10 @@
 # Introduction
 
-If you are new to the System of National Accounts [@SNA2008], don't worry, I will explain the most relevant concepts as we move forward. For now, it's sufficient to know that it is the macroeconomic accounting standard and data collection effort with which countries measure economic performance. It outputs the famous Gross Domestic Product (GDP) among many other macroeconomic indicators and it is one of the most important tools when designing and analyzing public policies.
+If you are new to the System of National Accounts [@SNA2008], don't worry, I will explain the most relevant concepts as we move forward. For now, it's sufficient to know that it is the macroeconomic accounting standard and data collection effort with which countries measure economic performance. It outputs the famous Gross Domestic Product (GDP), but it is much more than that. It has an abundance of data regarding production and consumption of goods and services in a country. However, the way in which this data is put together by Central Banks and Statistical Offices is often cumbersome to explore. This guide is designed to make that process much easier.
 
-In its most basic form 
+
+
+In this intr
+
 
 
