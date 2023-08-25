@@ -1,19 +1,51 @@
 # Introduction
 
-If you are new to the System of National Accounts [@SNA2008], don't worry, I will explain the most relevant concepts as we move forward. For now, it's sufficient to know that it is the macroeconomic accounting standard and data collection effort with which countries measure economic performance. It outputs the famous Gross Domestic Product (GDP), but it is much more than that. It has an abundance of data regarding production and consumption of goods and services in a country and abroad. However, the way in which this data is put together by Central Banks and Statistical Offices is often cumbersome to explore in my opinion. This guide is designed to make that process much easier.
+If you are new to the System of National Accounts [@SNA2008], don't worry, I will explain the most relevant concepts as we move forward. For now, it's sufficient to know that it is the macroeconomic accounting standard and data collection effort with which countries measure economic performance. It outputs the famous Gross Domestic Product (GDP), but it is much more than that. It has an abundance of data regarding production and consumption of goods and services by all of the sectors in a country's economy and abroad. However, the way in which this data is put together by Central Banks and Statistical Offices is often cumbersome to explore in my opinion. This guide is designed to make that process much easier.
 
-The System of National Accounts is quite comprehensive, as it covers the production and consumption of goods and services, the distribution of income and investment, government revenue and expenditure, and our financial interactions with the rest of the world. However, in this guide we will focus only on the production and consumption of goods and services. This part is found in what the SNA calls "Supply and Use Tables". In the following chapter, we will look at these tables more closely and explain their individual areas, each of which represent a series of "transactions" in SNA parlance. In the meantime, however, we will play a little with the final result.
+The System of National Accounts is quite comprehensive, as it covers the production and consumption of goods and services in a country, the distribution of income and investment, government revenue and expenditure, and its financial interactions with the rest of the world. However, in this guide we will focus only on the production and consumption of goods and services. This part is found in what the SNA calls "Supply and Use Tables". In the following chapter, we will look at these tables more closely and explain their individual areas, each of which represent a series of "transactions" in SNA parlance. In the meantime, however, we will play a little with the final result.
 
 ## Who is this book for and what you will learn
 
 As much as we are talking about a macroeconomic accounting standard, this is not an economics book. It is a data science book whose target audience are social science practitioners. That is people in public policy research or advisory positions who need to make sense of business, economic, environmental, and social issues using macroeconomic information.
 
-First, you will **import** supply and use tables into R. These tables are published in spreadsheet format (usually one or several Excel files) and you will see that, although Central Banks or statistical offices have their own idiosyncratic way of arranging these tables within those files, there are similarities that will help us make our approach general to most (if not all of them). After all, they are all based on a standard.
+First, you will **import** supply and use tables into R. These tables are published in spreadsheet format (usually one or several Excel files), traditionally, and you will see that, although Central Banks or statistical offices have their own idiosyncratic way of arranging these tables within those files, there are similarities that will help us make our import approach general to most (if not all of them). After all, they are all based on a standard.
 
+You will then **tidy** the data. Supply and use tables are multi-dimensional tables that resemble the end result of making a pivot table with macroeconomic data in Excel. So, essentially, you will have to work your way backwards in order to be able to use this information in R, because techniques to explore, manipulate, and perform computations on information are built upon the premise that data is stored in tables in which every column describes a single variable, and every row a single observation. Although, technically, data scientists include the creation of new variables in the transform step below, during our tidying up phase, we will also add columns that will allow us to aggregate the existing ones into more manageable subsets of information.
 
+You will then move into exploratory analysis territory and **transform** your data. In this phase you will take the database created in the previous step and add new variables as function of existing variables, pick variables based on their names, pick cases based on their values, summarize, and reorder the data, so that you are able to explore patterns in the data through the use of **appealing visualizations** and **meaningful tables**.
 
-```{r}
-library(tidyverse)
+Finally, but most importantly, we will explore **use cases** of our final database products in the fields of satellite accounting and input-output modelling. These use cases are the reason I developed the data management workflow from this guide and I want you to get a glimpse of *why* we are doing all of this.
+
+## Prerequisites
+
+My target reader is a public policy or business analyst from any professional field who needs to extract insights from macroeconomic data and focus on specific sectors of the economy or particular policy issues covering some or all sectors in the economy. It is better if you used spreadsheets before and are somewhat Excel/OpenOffice savvy, as well as possessing numerical literacy. Although, familiarity with R is helpful, I will assume your interactions with R are limited, so I will start from scratch. Of course, I'll add a note to beginner sections, signaling that you can skip ahead if you are more advanced.
+
+You will need to install software on your machine, so I recommend you have the necessary admin privileges to do so. You will find links to what you need to install below. Follow the instructions for your operating system. R+RStudio looks the same in Windows, Mac, or Linux, which makes this guide more general.
+
+### The R Project for Statistical Computing
+
+This is an R book and you need to install it from CRAN[^1]. I am using R version 4.3.1 while writing it. R is a free software environment for statistical computing and graphics.
+
+### RStudio
+
+While you can use bare-bone R to accomplish all the tasks from this book, having RStudio installed will make all of them simpler. RStudio is an integrated development environment (IDE) designed to support multiple languages, including both R and Python. Please download it from Posit's website[^2] and install it after you have R installed.
+
+### Spreadsheet software
+
+Supply and use tables are often published in Excel spreadsheets and so there is a need for us to be able to open these files and look around. That way, we will know where to point our data extraction functions. If you don't have a MS-Office licence, you can use LibreOffice[^3] or OpenOffice[^4] for this purpose.
+
+### Other R Packages
+
+We can extend the basic functionality of R through packages, which are libraries of custom functions with documentation that allow us to perform specific tasks. Don't worry, if you don't know what a function is. You'll find out right here. We'll use a function to install the required packages as we go. The [Tidyverse](https://www.tidyverse.org/) is a collection of very useful packages that we'll use throughout the book. If you have everything installed, open RStudio and in the console prompt (lower left quadrant) type the following and hit enter:
+
+```{r eval = FALSE}  
+install.packages("tidyverse")
 ```
 
+The code `install.packages()` is a _function_ that takes a string in quotation marks with the name of the package you want to install as a _parameter_. Okay, let's move on to the next chapter.
 
+
+[^1]: [https://cloud.r-project.org/](https://cloud.r-project.org/)
+[^2]: [https://posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/)
+[^3]: [https://www.libreoffice.org/discover/libreoffice/](https://www.libreoffice.org/discover/libreoffice/)
+[^4]: [https://www.openoffice.org/](https://www.openoffice.org/)

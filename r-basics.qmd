@@ -1,0 +1,13 @@
+# R basics
+
+If you are new to R, or programming for that matter, this section will get you acquainted with most of what we are going to be using in this book. R is an enormous statistical environment and it takes several books to only partially cover it, so adjust your expectations for this chapter. For a more comprehensive guide, I highly recommend the book _R in Action_ [@kabacoff_r_2022].
+
+R can be run in two ways; interactively and from scripts. Interactively means that you will type commands into the R prompt and from script means you will write a text file with a series of functions and R will execute all of them sequentially. You will write these scripts in the upper left quadrant of RStudio. Even if RStudio neatly shows you the file and the prompt at the same time, the script file remains a simple text file in your hard drive with the .R file extension.
+
+Most of what you will do in R is just creating a data object and then using functions to manipulate or change that object. Most functions operating on an object in R look like this:
+
+```{r eval=FALSE}
+some.function( object )
+```
+
+One exception to this form is how we create objects or, more precisely, how we assign values to named objects. For example, we can assing the value 2 to the variable a and 3 to the variable b in the following way.
