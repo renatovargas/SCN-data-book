@@ -2,14 +2,14 @@
 
 If you are new to R, or programming for that matter, this section will get you acquainted with most of what we are going to be using in this book. If you are familiar with the basics, just skip over to the next chapter. R is an enormous statistical environment and it takes several books to only partially cover it, so adjust your expectations for this chapter. For a more comprehensive guide, I highly recommend the book _R in Action_ [@kabacoff_r_2022].
 
-R can be run in two ways; interactively and from scripts. Interactively means that you will type commands into the R prompt and from script means you will write a text file with a series of functions and R will execute all of them sequentially when you press play. You will write these scripts in the upper left quadrant of RStudio. Even if RStudio neatly shows you the file and the prompt at the same time, the script file remains a simple text file in your hard drive with the .R file extension. It is not a binary file, like an .xlsx file.
+R can be run in two ways; interactively and from scripts. Interactively means that you will type commands into the R prompt and from script means you will write a text file with a series of functions and R will execute all of them sequentially when you press play. You will write these scripts in the upper left quadrant of RStudio. Even if RStudio neatly shows you the script file and the prompt at the same time, the former remains a simple text file in your hard drive with the .R file extension that you are just viewing through RStudio. It is not a binary file, like an Excel file, for example.
 
 ## Creating and manipulating objects
 
-Most of what you will do in R is create a data object and then using functions to manipulate or change that object. Most functions operating on an object in R look like this:
+Let's start to get acquainted with R commands. Most of what you will do in R is create a data object and then use functions to manipulate or change that object. Most functions operating on an object in R look like this:
 
 ```{r eval=FALSE}
-some.function( object, parameter1 = "some value" )
+some.function( object_name, parameter1 = "some value" )
 ```
 
 That is, the name of a function followed by brackets with no spaces in between. Inside the brackets we write the name of the object on which we want to operate. Optionally, or mandatory depending on the function, we can add _parameters_, which are additional instructions on how to execute the function. One exception to this form is how we create objects or, more precisely, how we assign values to named objects. For example, we assign the value 2 to the object a and 3 to the object b in the following way:
@@ -20,7 +20,7 @@ a <- 2
 b <- 3
 ```
 
-The less-than sign followed by a hyphen (or minus sign) simulates an arrow pointing to the object. In reality, it is a shortcut of the `assign()`function. The following is equivalent to the code above:
+In other languages, we would call `a` and `b` variables. In R everything is an object. The less-than sign followed by a hyphen (or minus sign) simulates an arrow pointing to the object. In reality, it is a shortcut of the `assign()`function. The following is equivalent to the code above:
 
 ```{r eval=FALSE}
 
@@ -29,7 +29,7 @@ assign("b", 3)
 
 ```
 
-This second version looks more like how most functions look in R, but of course the first way is much more convenient. You can also use a single equal sign instead of our neat little arrow (`a = 2`), but R users don't often use it, because it is common to use the equal sign for logical comparisons where we ask, for example, is a equal to b above?
+This second version looks more like how most functions look in R, but of course the first way is much more convenient. You can also use a single equal sign instead of our neat little arrow (`a = 2`), but R users don't often use it, because it is common to use the equal sign for logical comparisons where we test for equality. Is a equal to b above?
 
 ```{r}
 
@@ -38,51 +38,49 @@ a == b
 
 This evaluates to the boolean value `FALSE`, because 2 is not equal to 3. This small digression is here just to explain why we avoid using the equal sign to assign values to objects.
 
-If you are coming from other languages, `a <- 2` is the same as declaring a variable and then pointing it to a value, but in R the declaration and assignation happen in the same step. The only caveat of this convenience is that you cannot create empty objects as placeholders; a common practice in other languages. If you type this in the R prompt and hit enter, R will just print a `+` sign and wait for you indefinitely to input a value:
-
-```{r eval = FALSE}
-c <- 
-```
+If you are coming from other languages, `a <- 2` is the same as declaring a variable and then pointing it to a value, but in R the declaration and assignation happen in the same step.
 
 ## Let's create some objects
 
 Technically, you can assign any of what R calls atomic structures to objects. These are _numeric, complex, logical, character and raw._. I'll explain each as we come across them in our code. You can also assign more complex groups of these structures to objects, like _vectors_, which are ordered collections of structures of the same kind or _lists_ which group structures of different kinds. `a` and `b` in the code above are of type _numeric_. Let's see what else we can create.
 
-A vector with a range of numbers can be created by separating the starting number and the end number by an ellipsis within a concatenate function.
+A vector with a range of numbers can be created by separating the starting number and the end number by an ellipsis within a concatenate function `c()`.
 
 ```{r}
-numbers10 <- c(1:10)
-numbers10
+numbers_10 <- c(1:10)
+numbers_10
 ```
 
-Here we used the _concatenate_ function `c()` to create a vector with the numbers from 1 to 10. This is equivalent to writing `numbers10 <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)`
+Here we used the _concatenate_ function `c()` to create a vector with the numbers from 1 to 10. This is equivalent to writing `numbers10 <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)`. You can also see that we named our object `numbers_10`, but we could have named it whatever we wanted. There are several conventions for naming things. I recommend that you make your names clear to whoever reads your code. Even you from the future. So `pty_rte` is not as clear as `poverty_rate` and you'll likely forget what the shortened version meant. You can `use snake_case`, `camelCase`, or `use.periods`. Whatever you decide to use, make it consistent across your work.
 
-A string
+Now let's store a string. Strings are collections of characters or text and being able to manipulate text is very useful in National Accounts work, because it allows us to use the names of things in the standard classifications of products, economic activities and transactions instead of numeric codes. We tell R something is a string by surrounding it with quotation marks `" "`. We will manipulate our names quite a bit. Let's assign the word `"National"` to the `c` object. Type `c` in your prompt afterwards and it will be printed back to you.
 
 ```{r}
 c <- "National"
 c
 ```
 
-A vector of strings
+Another useful place where we use text is in our code. It is a good practice to leave comments that explain what our code does or why we chose a certain course of action. To do this, we indicate R that something is not to be evaluated by preceding it with a hashtag `#` like this:
 
 ```{r}
-d <- c( "One", "Two", "Three")
+# This text is not evaluated and the following function produces
+# numbers from one to ten.
+c(1:10)
+```
+
+Now let's try a vector of strings. Remember, we said a vector is an ordered collection of structures of the same kind. You can imagine how this can be useful, for example, to store the names of our economic sectors.
+
+```{r}
+d <- c( "Agriculture", "Manufacturing", "Services")
 d
 ```
 
-Usando la función de asignación
+We can get fancy and sample out of a bag of things, like letters from the English alphabet, by assigning them as vectors in an object, and then use the sample function to take out a desired number of elements from it, with or without replacement.  
 
 ```{r}
-assign("b", a)
-b
-```
-
-Usando un muestreo 
-
-```{r}
-three_letters <- LETTERS[1:20]
-characters <- sample(three_letters, 10, replace = TRUE)
+three_letters <- LETTERS[1:20]  # Use LETTERS[] function to create a vector.
+characters <- sample(three_letters, 10, replace = TRUE) # Sample 10 elements
+                                                        # with replacement.
 three_letters
 characters
 ```
