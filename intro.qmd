@@ -6,7 +6,7 @@ The System of National Accounts is quite comprehensive, as it covers the product
 
 ## Who is this book for and what you will learn
 
-As much as we are talking about a macroeconomic accounting standard, this is not an economics book. It is a data science book whose target audience are social science practitioners. That is people in public policy research or advisory positions who need to make sense of business, economic, environmental, and social issues using macroeconomic information.
+As much as we are talking about a macroeconomic accounting standard, this is not an economics book. It is a data science book whose target audience are social science practitioners. That is people in public policy research or advisory positions who need to make sense of business, economic, environmental, and social issues using macroeconomic information. **You will create a tidy database from Excel tables using R and you will learn how to query it and mix it with other types of data.**
 
 First, you will **import** supply and use tables into R. These tables are published in spreadsheet format (usually one or several Excel files), traditionally, and you will see that, although Central Banks or statistical offices have their own idiosyncratic way of arranging these tables within those files, there are similarities that will help us make our import approach general to most (if not all of them). After all, they are all based on a standard.
 
@@ -14,7 +14,7 @@ You will then **tidy** the data. Supply and use tables are multi-dimensional tab
 
 You will then move into exploratory analysis territory and **transform** your data. In this phase you will take the database created in the previous step and add new variables as function of existing variables, pick variables based on their names, pick cases based on their values, summarize, and reorder the data, so that you are able to explore patterns in the data through the use of **appealing visualizations** and **meaningful tables**.
 
-Finally, but most importantly, we will explore **use cases** of our final database products in the fields of satellite accounting and input-output modelling. These use cases are the reason I developed the data management workflow from this guide and I want you to get a glimpse of *why* we are doing all of this.
+Finally, but most importantly, we will explore **use cases** of our final database products in the fields of satellite accounting and input-output modelling. These use cases are the reason I developed the data management workflow from this guide and I want you to get a glimpse of **why** we are doing all of this.
 
 ## Prerequisites
 
