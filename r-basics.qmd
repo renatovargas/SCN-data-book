@@ -1,10 +1,10 @@
-# R basics
+# Getting started with R {#sec-getting-started-with-R}
 
 If you are new to R, or programming for that matter, this section will get you acquainted with most of what we are going to be using in this book. If you are familiar with the basics, just skip over to the next chapter. R is an enormous statistical environment and it takes several books to only partially cover it, so adjust your expectations for this chapter. For a more comprehensive guide, I highly recommend the book _R in Action_ [@kabacoff_r_2022].
 
 R can be run in two ways; interactively and from scripts. Interactively means that you will type commands into the R prompt and from script means you will write a text file with a series of functions and R will execute all of them sequentially when you press play. You will write these scripts in the upper left quadrant of RStudio. Even if RStudio neatly shows you the script file and the prompt at the same time, the former remains a simple text file in your hard drive with the .R file extension that you are just viewing through RStudio. It is not a binary file, like an Excel file, for example.
 
-## Creating and manipulating objects
+## The very basics {#sec-basics}
 
 Let's start to get acquainted with R commands. Most of what you will do in R is create a data object and then use functions to manipulate or change that object. First, a side note. From here onwards, pay attention to how you type code if you are following along. If something doesn't run, you are probably missing a comma. Let's move on. Most functions operating on an object in R look like this:
 
@@ -20,7 +20,7 @@ a <- 2
 b <- 3
 ```
 
-In other languages, we would call `a` and `b` variables. In R everything is an object. The less-than sign followed by a hyphen (or minus sign) simulates an arrow pointing to the object. In reality, it is a shortcut of the `assign()`function. The following is equivalent to the code above:
+In other languages, we would call `a` and `b` variables. In R everything is an object. The less-than sign followed by a hyphen (or minus sign) simulates an arrow pointing to the object. In reality, it is a shortcut for the `assign()`function. The following is equivalent to the code above:
 
 ```{r eval=FALSE}
 
@@ -40,9 +40,28 @@ This evaluates to the boolean value `FALSE`, because 2 is not equal to 3. This s
 
 If you are coming from other languages, `a <- 2` is the same as declaring a variable and then pointing it to a value, but in R the declaration and assignation happen in the same step.
 
-## Let's create some objects
+Before we move on, I want to point out that R has a comprehensive help system that gets installed with your distribution by default, and all libraries that extend it have to follow strict documentation procedures to get accepted into the R ecosystem, which means that you can lookup explanations to all functions in the system, with examples. There are many ways of accessing that documentation. If you want to browse all topics, you can type:
 
-Technically, you can assign any of what R calls atomic structures to objects. These are _numeric, complex, logical, character and raw._. I'll explain each as we come across them in our code. You can also assign more complex groups of these structures to objects, like _vectors_, which are ordered collections of structures of the same kind or _lists_ which group structures of different kinds. `a` and `b` in the code above are of type _numeric_. Let's see what else we can create.
+```{r eval=FALSE}
+help.start()
+```
+
+If you are running R from the command line, your default browser will open to the html help home page. If you are using RStudio, focus of the lower right quadrant will shift to the **Help** tab, like in the screenshot below.
+
+![RStudio help tab screenshot](img/help-tab-screenshot.png){#fig-rstudio-help-screenshot width=500 fig-alt="A screenshot of RStudio help." fig-align="left"}
+
+However, if you want to access the help for a specific function you can specify it as an argument to the `help()` function in quotation marks. For example, we can lookup the help entry for the concatenate `c()` function or the `matrix()` function which we will use in our examples below.
+
+```{r eval=FALSE}
+help("c")
+help("matrix")
+```
+
+![RStudio help tab showing the "matrix" entry](img/help-matrix-entry.png){#fig-RStudio-help-screenshot width=500 fig-alt="A screenshot of RStudio help with the matrix entry." fig-align="left"}
+
+## Let's create some objects{#sec-create-objects}
+
+Technically, you can assign any of what R calls atomic structures to objects. These are _numeric, complex, logical, character and raw_. I will explain each as we come across them in our code. You can also assign more complex groups of these structures to objects, like _vectors_, which are ordered collections of structures of the same kind or _lists_ which group structures of different kinds. `a` and `b` in the code above are of type _numeric_. Let's see what else we can create.
 
 A vector with a range of numbers can be created by separating the starting number and the end number by an ellipsis within a concatenate function `c()`.
 
@@ -60,11 +79,18 @@ c <- "National"
 c
 ```
 
+A very useful function to use with character strings is `paste()`, which coerces all types to text and lets you join pieces of text together. This is useful to create names programmatically and other operations common in National Accounts data manipulation. Here's an example.
+
+```{r}
+paste(c, "Accounts" )
+```
+
 Another useful place where we use text is in our code. It is a good practice to leave comments that explain what our code does or why we chose a certain course of action. To do this, we indicate R that something is not to be evaluated by preceding it with a hashtag `#` like this:
 
 ```{r}
-# This text is not evaluated and the following function produces
-# numbers from one to ten.
+# This text is not evaluated and the following 
+# function produces numbers from one to ten.
+# It's not the object c, but the concatenate function.
 c(1:10)
 ```
 
@@ -78,16 +104,23 @@ d
 We can get fancy and sample out of a bag of things, like letters from the English alphabet, by assigning them as a vector inside an object, and then use the sample function to take out a desired number of elements from it, with or without replacement.  
 
 ```{r}
-three_letters <- LETTERS[1:20]  # Use LETTERS[] function to create a vector.
-characters <- sample(three_letters, 10, replace = TRUE) # Sample 10 elements
-                                                        # with replacement.
+three_letters <- LETTERS[1:20]  # <1> 
+characters <- sample(three_letters, 10, replace = TRUE) # <2> 
+```
+1. Use LETTERS[] function to create a vector of the first 20 letters of the English alphabet.
+2. Sample 10 elements with replacement from `three_letters` and create the `characters` object with a vector of them.
+
+
+```{r}
 three_letters
 characters
 ```
 
 ## Matrices and data frames
 
-In R, a matrix is a two-dimensional collection of elements of the same data type (numeric, character, or logical) arranged into a fixed number of rows and columns. We can certainly import a matrix from a spreadsheet, but we can also construct one by sort of weaving a vector along a predetermined rectangular structure in which you specify a number of rows and columns. We also add the parameter `byrow = TRUE`, which means that it will fill the matrix moving from cell to cell horizontally, instead of the default, which is vertically. This is also a good time to explain that you can embed functions inside other functions, getting incredible recursive power that we will use in our National Accounts work. Here we se the concatenate function `c()` embedded inside a `matrix()` function.
+### Matrices
+
+In R, a matrix is a two-dimensional collection of elements of the same data type (numeric, character, or logical) arranged into a fixed number of rows and columns. We can certainly import a matrix from a spreadsheet, but we can also construct one by sort of weaving a vector along a predetermined rectangular structure in which you specify a number of rows and columns. We also add the parameter `byrow = TRUE`, which means that it will fill the matrix moving from cell to cell horizontally, instead of the default, which is vertically. This is also a good time to explain that you can embed functions inside other functions, getting incredible recursive power that we will use in our National Accounts work. Here we use the concatenate function `c()` embedded inside a `matrix()` function. Note that I'm using a capital `G` here. R is case sensitive, which means that to R, `G` is different from `g`. In matrix algebra, it is conventional to refer to matrices with uppercase letters and to vectors with lowercase letters, but I could have used a lowercase `g` in R.
 
 ```{r}
 # This is the matrix we want to build:
@@ -96,72 +129,76 @@ In R, a matrix is a two-dimensional collection of elements of the same data type
 #       7   8   9
 #      12  34  28
 
-g <- matrix( c(3,4,5,7,8,9,12,34,28), nrow = 3, ncol = 3, byrow = TRUE)
-g
+G <- matrix( c(3,4,5,7,8,9,12,34,28), nrow = 3, ncol = 3, byrow = TRUE)
+G
 ```
 
 We can arrange our code in a way that is more intuitive, by taking advantage of the fact that R will wait until the end of the function---the closing bracket `)`---to run the code even if you hit return several times. The same code from above can be written like this:
 
 ```{r}
-g <- matrix( c(  3,  4,  5, 
+G <- matrix( c(  3,  4,  5, 
                  7,  8,  9, 
                 12, 34, 28), 
             nrow = 3, 
             ncol = 3, 
             byrow = TRUE)
-g
+G
 ```
 
-Oh, and make a mental note of the numbers in square brackets that are printed back to us indicating row and column numbers. These are called indexes and they are one of the most powerful features of R. Borrowing from matrix notation in math, you can refer to any position in a matrix or data frame by an index consisting of two numbers separated by a comma surrounded by square brackets. You provide the row number first, and then the column number. So if we want to extract the number 28 from our matrix above, we would 
+Oh, and make a mental note of the numbers in square brackets that are printed back to us indicating row and column numbers. These indicate the row or column index and they are one of the most powerful features of R. Borrowing from matrix notation in math, you can refer to any position in a matrix or data frame by an index consisting of two numbers separated by a comma surrounded by square brackets. You provide the row number first, and the column number second. This way, if we want to extract the number 9 from our matrix above, we would write the name of the matrix followed by a bracket with the index numbers referring to the second and third column, in that order, separated by commas.
+
+```{r}
+G[2,3]
+```
+You can also omit one of the indices to tell R that you want all the rows or columns to which the index refers returned. It is important to understand that, unlike matrix algebra, vectors in R have no vertical or horizontal orientation.
+
+```{r}
+G[2,] # <1> 
+G[,3] # <2>
+```
+1. Extract all the columns from the second row as a vector.
+2. Extract the rows from the third column as a vector.
+
+Or you can provide a vector of numbers denoting the "location" of the index you want for either rows or columns like in the following case, where we provide a vector of rows 1 and 3 for the rows argument of the index brackets `[]`, instead of just one number. This can be read as provide me with the elements you find at the intersection of rows 1 and 3 and column 3.
+```{r}
+G[c(1,3), 3]
+```
 
 
+You can also negate an index by preceding it with a minus sign (`-`) and get in return everything except what you negated. For example the following code instructs to get the elements corresponding to rows 2 and 3 (-1 or not 1) and columns 1 and 2 (-3 or not 3).
 
-A data frame
+```{r}
+G[-1,-3]
+```
+
+
+One important attribute of matrices (and data frames below) is its dimensions. The `dim()` attribute returns a vector consisting of two numbers, the first one tells us the number of rows of a matrix or data frame and the second one tells us the number of columns. In later chapters we will use this attribute to write code that can be generalized to a matrices or data frames of any size.
+
+```{r}
+dim(G)
+```
+
+
+### Data frames
+
+According to R's `help("data.frame")`, data frames are "tightly coupled collections of variables which share many of the properties of matrices and of lists, used as the fundamental data structure by most of R's modeling software." It goes on to say that they "may for many purposes be regarded as a matrix with columns possibly of differing modes and attributes. It may be displayed in matrix form, and its rows and columns extracted using matrix indexing conventions." I would explain it as a matrix-like rectangular structure, in which every column represents a variable and every row represents an observation. That means that the content of every column can be of a different type. For example, we can have a column representing temperature, in which every cell contains an observation of temperature recorded in double precision real numbers. Another column might have the letter designation of the location where the temperature was taken recorded in character strings. 
+
+Let's join three vectors into a data frame. We will use the function `data.frame()` to do this. The following code can be read as, please create a data frame. For the first column, just take advantage of R's recycling rule and repeat the number 1 to match the longest vector in the function. Name the column "x". For the second column, let's use the numbers from 1 to 10 and name it "y". And for the third column, use the elements of the vector `characters` that we created before (@sec-create-objects).
 
 ```{r}
 e <- data.frame(x = 1, y = 1:10, characters = characters)
 e
 ```
 
-Extract the values from a column into a vector
+We can use the dollar sign (`$`) to extract the content of any column as a vector. Let's extract the column "y" from our recently created `e` data frame and multiply all the elements of that vector by 2. A real life example could be if we needed to know the equivalent of certain values in another currency, given an exchange rate (here the number 2).
 
 ```{r}
-extraccion <- e$y
-extraccion
+extract <- e$y
+extract
+
+extract * 2
 ```
 
-Multiply that vector by a number
+## Chapter summary {#sec-getting-started-with-R-summary}
 
-```{r}
-extraccion * 2
-```
-
-## String concatenation
-
-```{r}
-paste(c, "Accounts" )
-```
-
-## Indexing
-
-..vectors
-
-```{r}
-a
-a[ c(1,3) ]
-```
-
-...matrices or data frames
-
-```{r}
-g
-g[c(1,3), 3]
-```
-
-Indexing by negation
-
-```{r}
-g
-g[-1,-3]
-```
-
+In this chapter, we got acquainted with R syntax and learned the basic structure of functions. We also learned about some of R's objects, which are relevant for National Accounts data manipulation and we saw some of the functions that are useful to manipulate those objects. We also learned about R's powerful help system and how to query it for our purposes.
