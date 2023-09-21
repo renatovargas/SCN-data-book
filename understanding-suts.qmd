@@ -1,0 +1,3 @@
+# Understanding Supply and Use Tables {#sec-understanding-suts}
+
+Before we can wrangle and tidy up data, we need to understand the monster that we are taming. In this chapter, we will explore Costa Rica's supply and use table.
