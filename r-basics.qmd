@@ -42,7 +42,7 @@ If you are coming from other languages, `a <- 2` is the same as declaring a vari
 
 ## Let's create some objects
 
-Technically, you can assign any of what R calls atomic structures to objects. These are _numeric, complex, logical, character and raw._. I'll explain each as we come across them in our code. You can also assign more complex groups of these structures to objects, like _vectors_, which are ordered collections of structures of the same kind or _lists_ which group structures of different kinds. `a` and `b` in the code above are of type _numeric_. Let's see what else we can create.
+Technically, you can assign any of what R calls atomic structures to objects. These are _numeric, complex, logical, character and raw_. I'll explain each as we come across them in our code. You can also assign more complex groups of these structures to objects, like _vectors_, which are ordered collections of structures of the same kind or _lists_ which group structures of different kinds. `a` and `b` in the code above are of type _numeric_. Let's see what else we can create.
 
 A vector with a range of numbers can be created by separating the starting number and the end number by an ellipsis within a concatenate function `c()`.
 
@@ -63,8 +63,8 @@ c
 Another useful place where we use text is in our code. It is a good practice to leave comments that explain what our code does or why we chose a certain course of action. To do this, we indicate R that something is not to be evaluated by preceding it with a hashtag `#` like this:
 
 ```{r}
-# This text is not evaluated and the following function produces
-# numbers from one to ten.
+# This text is not evaluated and the following
+# function produces numbers from one to ten.
 c(1:10)
 ```
 
@@ -112,8 +112,34 @@ g <- matrix( c(  3,  4,  5,
 g
 ```
 
-Oh, and make a mental note of the numbers in square brackets that are printed back to us indicating row and column numbers. These are called indexes and they are one of the most powerful features of R. Borrowing from matrix notation in math, you can refer to any position in a matrix or data frame by an index consisting of two numbers separated by a comma surrounded by square brackets. You provide the row number first, and then the column number. So if we want to extract the number 28 from our matrix above, we would 
+Make a mental note of the numbers in square brackets that are printed back to us indicating row and column numbers. These are called indexes and they are one of the most powerful features of R. 
 
+## Indexing
+
+Borrowing from matrix notation in math, you can refer to any position in a matrix or data frame by an index consisting of two numbers separated by a comma surrounded by square brackets. You provide the row number first, and then the column number. So if we want to extract the number 34 from our matrix above, we would find it in row 3 and column 2. We print `g` again for reference.
+
+```{r}
+g
+g[3,2]
+```
+
+If you leave, either the first, or the second position inside the square brackets blank, `R` will select the entire row or column. For example, to get the entire last column as a vector of numbers you would type the following code to tell `R` that you want all rows, but only for the third column. Note that, unlike in matrix algebra, vectors do not have an orientation, only a length, and that is why our result is not presented in a vertical format.
+
+```{r}
+g[,3]
+```
+
+You can pass a vector of numbers using `c()` to any of the two positions to extract, specific combinations of colums or rows. For example, to get the four numbers in the lower left corner of the matrix, you can type:
+
+```{r}
+g[ c(2,3) , c(1,2) ]
+```
+
+And finally, using the minus sign `-` you can omit any row or column by index. This is useful in our National Account work, when we import data from an Excel file and want to omit calculated rows or columns with totals and subtotals. In our running example, if you wanted to omit the second row and the second column of our `g` matrix, leaving only a matrix with the four elements in the corners you could negate the indexes.
+
+```{r}
+g[-2,-2]
+```
 
 
 A data frame
@@ -141,27 +167,3 @@ extraccion * 2
 ```{r}
 paste(c, "Accounts" )
 ```
-
-## Indexing
-
-..vectors
-
-```{r}
-a
-a[ c(1,3) ]
-```
-
-...matrices or data frames
-
-```{r}
-g
-g[c(1,3), 3]
-```
-
-Indexing by negation
-
-```{r}
-g
-g[-1,-3]
-```
-
