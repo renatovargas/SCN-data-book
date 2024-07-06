@@ -132,26 +132,26 @@ Make a mental note of the numbers in square brackets that are printed back to us
 Borrowing from matrix notation in math, you can refer to any position in a matrix or data frame by an index consisting of two numbers separated by a comma surrounded by square brackets. You provide the row number first, and then the column number. So if we want to extract the number 34 from our matrix above, we would find it in row 3 and column 2. We print `g` again for reference.
 
 ```{r}
-g
-g[3,2]
+G
+G[3,2]
 ```
 
 If you leave, either the first, or the second position inside the square brackets blank, `R` will select the entire row or column. For example, to get the entire last column as a vector of numbers you would type the following code to tell `R` that you want all rows, but only for the third column. Note that, unlike in matrix algebra, vectors do not have an orientation, only a length, and that is why our result is not presented in a vertical format.
 
 ```{r}
-g[,3]
+G[,3]
 ```
 
 You can pass a vector of numbers using `c()` to any of the two positions to extract, specific combinations of colums or rows. For example, to get the four numbers in the lower left corner of the matrix, you can type:
 
 ```{r}
-g[ c(2,3) , c(1,2) ]
+G[ c(2,3) , c(1,2) ]
 ```
 
 And finally, using the minus sign `-` you can omit any row or column by index. This is useful in our National Account work, when we import data from an Excel file and want to omit calculated rows or columns with totals and subtotals. In our running example, if you wanted to omit the second row and the second column of our `g` matrix, leaving only a matrix with the four elements in the corners you could negate the indexes.
 
 ```{r}
-g[-2,-2]
+G[-2,-2]
 ```
 
 You can also negate an index by preceding it with a minus sign (`-`) and get in return everything except what you negated. For example the following code instructs to get the elements corresponding to rows 2 and 3 (-1 or not 1) and columns 1 and 2 (-3 or not 3).
@@ -172,7 +172,7 @@ dim(G)
 
 According to R's `help("data.frame")`, data frames are "tightly coupled collections of variables which share many of the properties of matrices and of lists, used as the fundamental data structure by most of R's modeling software." It goes on to say that they "may for many purposes be regarded as a matrix with columns possibly of differing modes and attributes. It may be displayed in matrix form, and its rows and columns extracted using matrix indexing conventions." I would explain it as a matrix-like rectangular structure, in which every column represents a variable and every row represents an observation. That means that the content of every column can be of a different type. For example, we can have a column representing temperature, in which every cell contains an observation of temperature recorded in double precision real numbers. Another column might have the letter designation of the location where the temperature was taken recorded in character strings. 
 
-Let's join three vectors into a data frame. We will use the function `data.frame()` to do this. The following code can be read as, please create a data frame. For the first column, just take advantage of R's recycling rule and repeat the number 1 to match the longest vector in the function. Name the column "x". For the second column, let's use the numbers from 1 to 10 and name it "y". And for the third column, use the elements of the vector `characters` that we created before (@sec-create-objects).
+Let's join three vectors into a data frame. We will use the function `data.frame()` to do this. The following code can be read as, please create a data frame. For the first column, just take advantage of R's recycling rule and repeat the number 1 to match the longest vector in the function. Name the column "x". For the second column, let's use the numbers from 1 to 10 and name it "y". And for the third column, use the elements of the vector `characters` that we created before.
 
 ```{r}
 e <- data.frame(x = 1, y = 1:10, characters = characters)
@@ -191,7 +191,7 @@ extract * 2
 Multiply that vector by a number
 
 ```{r}
-extraccion * 2
+extract * 2
 ```
 
 ## String concatenation
